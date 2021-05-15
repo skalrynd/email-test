@@ -67,7 +67,17 @@ class EmailSendTest extends TestCase
         unset($fields['attachment_file']);
 
         $response = $this->postJson('/email-send', $fields);
-
         $response->assertStatus(200);
+
+        //422 with missing field
+        unset($fields['message']);
+        $response = $this->postJson('/email-send', $fields);
+        $response->assertStatus(422);
+
+        //422 with illegal email address
+        $fields['message'] = 'restoring message';
+        $fields['email_address'] = 'notAnEmailAtAll';
+        $response = $this->postJson('/email-send', $fields);
+        $response->assertStatus(422);
     }
 }
