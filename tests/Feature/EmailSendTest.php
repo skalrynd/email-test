@@ -38,19 +38,19 @@ class EmailSendTest extends TestCase
      */
     public function test_send_mail()
     {
-//
-//        $fields = static::getEmailFields();
-//
-//        $mailer = new EmailSend($fields);
-//        $mailer->assertSeeInHtml($fields['message']);
-//        $mailer->assertSeeInHtml($fields['email_address']);
-//
-//        Mail::fake();
-//        Mail::assertNothingQueued();
-//        Mail::to('example@example.com')->send($mailer);
-//        Mail::assertQueued(EmailSend::class);
-//        Mail::to('example@example.com')->send($mailer);
-//        Mail::assertQueued(EmailSend::class, 2);
+
+        $fields = static::getEmailFields();
+
+        $mailer = new EmailSend($fields);
+        $mailer->assertSeeInHtml($fields['message']);
+        $mailer->assertSeeInHtml($fields['email_address']);
+
+        Mail::fake();
+        Mail::assertNothingQueued();
+        Mail::to('example@example.com')->send($mailer);
+        Mail::assertQueued(EmailSend::class);
+        Mail::to('example@example.com')->send($mailer);
+        Mail::assertQueued(EmailSend::class, 2);
     }
 
     /**
